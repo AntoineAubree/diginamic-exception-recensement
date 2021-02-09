@@ -32,7 +32,7 @@ public class RecherchePopulationBorneService extends MenuService {
 		System.out.println("Choississez une population minimum (en milliers d'habitants): ");
 		String saisieMin = scanner.nextLine();
 		if (!Pattern.matches(regexInteger, saisieMin)) {
-			throw new NotANumberException("Le minimum doit être un entier suppérieur à 0");
+			throw new NotANumberException("Le minimum doit être un entier suppérieur à 0"); 
 		}
 
 		System.out.println("Choississez une population maximum (en milliers d'habitants): ");
