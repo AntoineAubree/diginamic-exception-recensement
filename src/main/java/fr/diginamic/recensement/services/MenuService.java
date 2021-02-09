@@ -3,7 +3,8 @@ package fr.diginamic.recensement.services;
 import java.util.Scanner;
 
 import fr.diginamic.recensement.entites.Recensement;
-import fr.diginamic.recensement.exceptions.SaisieUtilisateurException;
+import fr.diginamic.recensement.exceptions.NotANumberException;
+import fr.diginamic.recensement.exceptions.RecensementException;
 import fr.diginamic.recensement.exceptions.ValeurIncoherenteException;
 
 /**
@@ -21,7 +22,7 @@ public abstract class MenuService {
 	 * @param lignes  lignes du fichier
 	 * @param scanner scanner
 	 * @throws ValeurIncoherenteException 
-	 * @throws SaisieUtilisateurException 
+	 * @throws NotANumberException 
 	 */
-	public abstract void traiter(Recensement recensement, Scanner scanner) throws ValeurIncoherenteException, SaisieUtilisateurException;
+	public abstract void traiter(Recensement recensement, Scanner scanner) throws RecensementException;
 }

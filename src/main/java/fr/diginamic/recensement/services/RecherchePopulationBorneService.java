@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.entites.Ville;
-import fr.diginamic.recensement.exceptions.SaisieUtilisateurException;
+import fr.diginamic.recensement.exceptions.NotANumberException;
+import fr.diginamic.recensement.exceptions.RecensementException;
 import fr.diginamic.recensement.exceptions.ValeurIncoherenteException;
 
 /**
@@ -20,9 +21,9 @@ import fr.diginamic.recensement.exceptions.ValeurIncoherenteException;
 public class RecherchePopulationBorneService extends MenuService {
 
 	@Override
-	public void traiter(Recensement rec, Scanner scanner) throws ValeurIncoherenteException, SaisieUtilisateurException {
+	public void traiter(Recensement rec, Scanner scanner) throws RecensementException {
 		
-		String regex = "[+]?[0-9]+";
+		String regexInteger = "[+]?[0-9]+";
 		boolean departementOk = false;
 
 		System.out.println("Quel est le code du département recherché ? ");
@@ -30,14 +31,14 @@ public class RecherchePopulationBorneService extends MenuService {
 
 		System.out.println("Choississez une population minimum (en milliers d'habitants): ");
 		String saisieMin = scanner.nextLine();
-		if (!Pattern.matches(regex, saisieMin)) {
-			throw new SaisieUtilisateurException("Le minimum doit être un entier suppérieur à 0");
+		if (!Pattern.matches(regexInteger, saisieMin)) {
+			throw new NotANumberException("Le minimum doit être un entier suppérieur à 0");
 		}
 
 		System.out.println("Choississez une population maximum (en milliers d'habitants): ");
 		String saisieMax = scanner.nextLine();
-		if (!Pattern.matches(regex, saisieMax)) {
-			throw new SaisieUtilisateurException("Le maximum doit être un entier suppérieur à 0");
+		if (!Pattern.matches(regexInteger, saisieMax)) {
+			throw new NotANumberException("Le maximum doit être un entier suppérieur à 0");
 		}
 
 		int min = Integer.parseInt(saisieMin) * 1000;
@@ -60,8 +61,8 @@ public class RecherchePopulationBorneService extends MenuService {
 				}
 			}
 		}
-		if (departementOk == false) {
-			throw new SaisieUtilisateurException("Le code de département saisit n'existe pas");
+		if (!departementOk) {
+			throw new NotANumberException("Le code de département saisit n'existe pas");
 		}
 	}
 

@@ -1,9 +1,11 @@
 package fr.diginamic.recensement;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import fr.diginamic.recensement.entites.Recensement;
-import fr.diginamic.recensement.exceptions.SaisieUtilisateurException;
+import fr.diginamic.recensement.exceptions.NotANumberException;
+import fr.diginamic.recensement.exceptions.RecensementException;
 import fr.diginamic.recensement.exceptions.ValeurIncoherenteException;
 import fr.diginamic.recensement.services.RechercheDepartementsPlusPeuplees;
 import fr.diginamic.recensement.services.RecherchePopulationBorneService;
@@ -49,8 +51,13 @@ public class Application {
 			// Poser une question à l'utilisateur
 			String choixMenu = scanner.nextLine();
 
-			// Conversion du choix utilisateur en int
-			choix = Integer.parseInt(choixMenu);
+			try {
+				// Conversion du choix utilisateur en int
+				choix = Integer.parseInt(choixMenu);
+			} catch (NumberFormatException e) {
+				System.err.println(e.getMessage());
+				choix = 0;
+			}
 
 			// On exécute l'option correspondant au choix de l'utilisateur
 			switch (choix) {
@@ -70,8 +77,8 @@ public class Application {
 				RecherchePopulationBorneService recherchePopBorne = new RecherchePopulationBorneService();
 				try {
 					recherchePopBorne.traiter(recensement, scanner);
-				} catch (ValeurIncoherenteException | SaisieUtilisateurException e) {
-					System.out.println(e.getMessage());
+				} catch (RecensementException e) {
+					System.err.println(e.getMessage());
 					e.printStackTrace();
 				}
 				break;
