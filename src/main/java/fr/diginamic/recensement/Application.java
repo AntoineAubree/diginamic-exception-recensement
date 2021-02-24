@@ -1,12 +1,9 @@
 package fr.diginamic.recensement;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import fr.diginamic.recensement.entites.Recensement;
-import fr.diginamic.recensement.exceptions.NotANumberException;
 import fr.diginamic.recensement.exceptions.RecensementException;
-import fr.diginamic.recensement.exceptions.ValeurIncoherenteException;
 import fr.diginamic.recensement.services.RechercheDepartementsPlusPeuplees;
 import fr.diginamic.recensement.services.RecherchePopulationBorneService;
 import fr.diginamic.recensement.services.RecherchePopulationDepartementService;
